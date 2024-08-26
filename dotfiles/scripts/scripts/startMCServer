@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -Xmx8G -jar ./server.jar nogui
