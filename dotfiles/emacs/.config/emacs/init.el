@@ -67,7 +67,8 @@
   :config
   (evil-set-undo-system 'undo-redo)
   (setq scroll-step 1 ; Vim scrolling
-  	scroll-margin 8) ; Scrolloff
+  	scroll-margin 8 ; Scrolloff
+        scroll-conservatively 101) ; Remove weird jumping
   (setq evil-echo-state nil)
   ;; C-w in minibuffer
   (add-hook 'minibuffer-mode-hook (lambda () (local-set-key (kbd "C-w") 'backward-kill-word)))
@@ -89,8 +90,7 @@
 ;;;;;;;;;;;;;;;;
 ;; UI Changes ;;
 ;;;;;;;;;;;;;;;;
-(if (find-font (font-spec :name "Hack"))
-    (set-frame-font "Hack 14" nil t))
+(add-to-list 'default-frame-alist '(font . "Fragment Mono 14"))
 
 (set-face-attribute 'variable-pitch nil :family "Helvetica Neue" :weight 'bold)
 

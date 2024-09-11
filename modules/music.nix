@@ -1,6 +1,9 @@
 { pkgs, ... } : {
-	home.packages = with pkgs; [
-		songrec
-		spotify
-	];
+  home.packages = with pkgs; [
+    playerctl
+    pamixer
+
+    songrec
+    spotify
+  ];
 }

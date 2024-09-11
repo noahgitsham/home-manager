@@ -13,19 +13,20 @@
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 
+;; XDG Paths
 (defvar emacs-data-path (if (getenv "XDG_DATA_HOME")
 			    (expand-file-name "emacs" (getenv "XDG_DATA_HOME"))
-			  ("~/.local/share/emacs"))
+			  "~/.local/share/emacs")
   "Location of user's persistent data.")
 
 (defvar emacs-state-path (if (getenv "XDG_STATE_HOME")
 			    (expand-file-name "emacs" (getenv "XDG_STATE_HOME"))
-			   ("~/.local/state/emacs"))
+			   "~/.local/state/emacs")
   "Location of user's state data")
 
 (defvar emacs-cache-path (if (getenv "XDG_CACHE_HOME")
 			    (expand-file-name "emacs" (getenv "XDG_CACHE_HOME"))
-			   ("~/.cache/emacs"))
+			   "~/.cache/emacs")
   "Location of user's cached data")
 
 (setq package-user-dir                   (expand-file-name "packages" emacs-data-path)

@@ -88,7 +88,7 @@
   (if (not (get-buffer-window "*splash*"))
       (progn (remove-hook 'window-state-change-hook #'recenter-or-kill t)
 	     (message "Hook removed")
-	     (kill-buffer "*splash*")
+	     (splash-screen-kill)
 	     (message "Buffer killed")
 	     )
     (splash-screen-recenter)
@@ -126,7 +126,8 @@
   "Kill the splash screen buffer (immediately)."
   (if (get-buffer "*splash*")
       (progn (message nil)
-             (kill-buffer "*splash*"))))
+             ;(kill-buffer "*splash*")
+	     )))
 
 
 ;; Install hook after frame parameters have been applied and only if
@@ -138,6 +139,7 @@
          )
     (progn
       (add-hook 'window-setup-hook #'splash-screen)
+      (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
       (put 'inhibit-startup-echo-area-message 'saved-value
 	   (setq inhibit-startup-echo-area-message (user-login-name)))
       (setq 

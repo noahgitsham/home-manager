@@ -20,18 +20,16 @@ in {
     ./modules/neovim.nix
     ./modules/cli.nix
     ./modules/desktop.nix
+    # ./modules/mime.nix
     # ./modules/games.nix
   ];
-  home.packages = with pkgs; [ blender stremio ];
+  home.packages = with pkgs; [ blender stremio signal-desktop-beta ];
 
   nixpkgs.config.allowUnfree = true;
 
   services.emacs = {
     enable = true;
     client.enable = true;
-  };
-  programs.emacs = {
-    enable = true;
   };
 
   services.udiskie = {
@@ -45,7 +43,8 @@ in {
   {
     ".zshrc".source = ./dotfiles/zsh/.zshrc;
     ".zshenv".source = ./dotfiles/zsh/.zshenv;
-    ".config/nvim".source = ./dotfiles/nvim/.config/nvim;
+    # ".config/nvim".source = ./dotfiles/nvim/.config/nvim;
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/.config/nvim";
     ".config/foot".source = ./dotfiles/foot/.config/foot;
     ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/tmux/.config/tmux";
     ".local/share/tmux/plugins/tpm".source = fetchGit { url = "https://github.com/tmux-plugins/tpm"; rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946"; };
@@ -58,8 +57,6 @@ in {
   }# // stow.stowFiles { "tmux" = [ ".config/tmux" ]; }
   ;
 
-  xdg.configFile."hypr/hyprland.conf".enable = false;
-
   home.pointerCursor = {
     name = cursor-name;
     package = cursor-package;
@@ -69,6 +66,11 @@ in {
     name = cursor-name;
     package = cursor-package;
   };
+
+  # gtk.theme = {
+  #   package = pkgs.gnome.gnome-themes-extra;
+  #   name = 
+  # };
 
   home.stateVersion = "24.05";
 }
