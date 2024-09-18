@@ -9,28 +9,20 @@ in {
 
   programs.home-manager.enable = true;
 
-  home.activation.diff = lib.hm.dag.entryAfter ["installPackages"] ''
-  echo
-  ${pkgs.nvd}/bin/nvd diff $oldGenPath $newGenPath
-  echo
-  '';
-
   imports = [
     ./modules/music.nix
     ./modules/neovim.nix
+    ./modules/emacs.nix
     ./modules/cli.nix
     ./modules/desktop.nix
-    # ./modules/mime.nix
-    # ./modules/games.nix
+    ./modules/design.nix
+    ./modules/mime.nix
+    ./modules/syncthing.nix
+    ./modules/production.nix
   ];
-  home.packages = with pkgs; [ blender stremio signal-desktop-beta ];
+  home.packages = with pkgs; [];
 
   nixpkgs.config.allowUnfree = true;
-
-  services.emacs = {
-    enable = true;
-    client.enable = true;
-  };
 
   services.udiskie = {
     enable = true;
@@ -71,6 +63,12 @@ in {
   #   package = pkgs.gnome.gnome-themes-extra;
   #   name = 
   # };
+
+  home.activation.diff = lib.hm.dag.entryAfter ["installPackages"] ''
+  echo
+  ${pkgs.nvd}/bin/nvd diff $oldGenPath $newGenPath
+  echo
+  '';
 
   home.stateVersion = "24.05";
 }

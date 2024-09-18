@@ -2,7 +2,8 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/*" = ["neovim.desktop"]
-    }
-  }
+      "text/*" = ["neovim.desktop"];
+      # "image/*" = []
+    };
+  };
 }

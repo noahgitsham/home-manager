@@ -1,4 +1,4 @@
-; Show startup time
+;; Show startup time
 (add-hook 'emacs-startup-hook
 	  (lambda()
 	    (message "Emacs loaded in %s"
@@ -6,7 +6,6 @@
 			     (string-to-number (emacs-init-time))))))
 
 ;; Package Manager
-;(load "elpaca" nil t)
 (defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" emacs-data-path))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -102,7 +101,7 @@
 (use-package doom-themes
   :init
   (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'modus-operandi t)
+  (load-theme 'doom-tomorrow-day t)
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -111,8 +110,8 @@
   ;(set-face-attribute 'org-todo nil :foreground "Yellow")
   (set-face-italic-p 'line-number nil)
   (set-face-italic-p 'line-number-current-line nil)
-  (set-face-attribute 'mode-line nil :background "#32302F")
-  (set-face-attribute 'header-line nil :background "#32302F")
+  ;(set-face-attribute 'mode-line nil :background "#32302F")
+  ;(set-face-attribute 'header-line nil :background "#32302F")
   (steal-face-attribute 'line-number :background 'default)
   (steal-face-attribute 'line-number-current-line :background 'default)
   )
@@ -142,16 +141,18 @@
 (setq line-number-mode nil ; Hide line number
       mode-line-modes nil  ; Hide modes
       )
+
 (setq-default mode-line-format nil)
-      ;;'("%e" mode-line-front-space
-      ;;	(:propertize
-      ;;	 ("" mode-line-client mode-line-modified)
-      ;;	 display
-      ;;	 (min-width
-      ;;	  (2.0)))
-      ;;	evil-mode-line-tag
-      ;;	mode-line-buffer-identification
-      ;;	mode-line-modes mode-line-misc-info mode-line-end-spaces))
+;;(setq-default mode-line-format 
+;;      '("%e" mode-line-front-space
+;;      	(:propertize
+;;      	 ("" mode-line-client mode-line-modified)
+;;      	 display
+;;      	 (min-width
+;;      	  (2.0)))
+;;      	evil-mode-line-tag
+;;      	mode-line-buffer-identification
+;;      	mode-line-modes mode-line-misc-info mode-line-end-spaces))
 
 ;; Header line
 (setq-default header-line-format
@@ -199,14 +200,11 @@ end-of-buffer signals; pass the rest to the default handler."
   :config
   (setq marginalia-align 'right)
   :init
-  (marginalia-mode 1)
-  )
+  (marginalia-mode 1))
 
 (use-package solaire-mode
   :init
-  (solaire-global-mode 1)
-
-  )
+  (solaire-global-mode 0))
 
 
 (defun steal-face-attribute (face attribute source &optional frame)
