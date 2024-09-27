@@ -9,5 +9,6 @@ in {
   home.packages = with pkgs; [
     ardour
     reaper
+    mixxx
   ] ++ plugins;
 }

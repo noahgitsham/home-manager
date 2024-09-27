@@ -2,47 +2,47 @@
 (require 'cl-lib)
 
 
-(defgroup splash-screen nil
-  "Splash screen")
-
-(defcustom splash-screen-title "GNU Emacs"
+(defun drop-title ()
   "Splash screen title"
-  :type 'string :group 'splash-screen)
+  "GNU Emacs")
 
-(defcustom splash-screen-subtitle "2024"
+(defun drop-subtitle ()
   "Splash screen subtitle"
-  :type 'string :group 'splash-screen)
+  (concat "v" (number-to-string emacs-major-version) "." (number-to-string emacs-minor-version))
+  ;;(format-time-string "%H:%M:%S")
+  )
+
+(setq drop-update-delay nil)
 
 (defun splash-screen ()
-  "Nano Emacs splash screen"
+  "Drop splash screen"
   (remove-hook 'window-setup-hook #'splash-screen)
 
   ;; Hide modeline before window-body-height is computed
-  (let* ((splash-buffer (get-buffer-create "*splash*")))
-    (with-current-buffer splash-buffer
+  (let* ((drop-buffer (get-buffer-create " *splash*")))
+    (with-current-buffer drop-buffer
       (setq header-line-format nil)
       (setq mode-line-format nil)
       (setq cursor-type nil)
       (if (fboundp 'evil-mode)
-	  (setq-local evil-normal-state-cursor nil)
-	  (setq-local evil-emacs-state-cursor nil)
-	(setq-local cursor-type nil))
+	  (setq-local evil-normal-state-cursor nil
+	              evil-emacs-state-cursor nil
+	              evil-emacs-visual-cursor nil)
+	(setq cursor-type nil))
       (display-line-numbers-mode 0)))
   
-  (let* ((splash-buffer  (get-buffer-create "*splash*"))
-         (height         (round (- (window-total-height nil) 1) ))
-         (width          (round (window-total-width nil)        ))
-         (padding-center (+ (/ height 2) 1)))
-    
-    ;; If there are buffer associated with filenames,
-    ;;  we don't show the splash screen.
-    (if (eq 0 (length (cl-loop for buf in (buffer-list)
-                              if (buffer-file-name buf)
-                              collect (buffer-file-name buf))))
+  ;; If there are buffer associated with filenames,
+  ;;  we don't show the splash screen.
+  (if (eq 0 (length (cl-loop for buf in (buffer-list)
+			     if (buffer-file-name buf)
+			     collect (buffer-file-name buf))))
         
-        (with-current-buffer splash-buffer
-          (erase-buffer)
-          
+      (let* ((drop-buffer  (get-buffer-create " *splash*"))
+	     (height         (round (- (window-body-height nil) 1) ))
+	     (width          (round (window-body-width nil)        ))
+	     (padding-center (+ (/ height 2) 1)))
+    
+	(with-current-buffer drop-buffer
           ;; Buffer local settings
           (if (one-window-p) (setq mode-line-format nil))
           (setq cursor-type nil)
@@ -55,21 +55,20 @@
 
           ;; Vertical padding to center
           (insert-char ?\n padding-center)
-          (insert (propertize splash-screen-title 'face 'default))
+          (insert (propertize (drop-title) 'face 'default))
           (center-line)
           (insert "\n")
-          (insert (propertize splash-screen-subtitle 'face 'shadow))
+          (insert (propertize (drop-subtitle) 'face 'shadow))
           (center-line)
 
           (goto-char 0)
           (read-only-mode 1)
-          (display-buffer-same-window splash-buffer nil)
+          (display-buffer-same-window drop-buffer nil)
 
 	  (message "")
-	  (add-hook 'window-state-change-hook #'recenter-or-kill nil t)
+	  (add-hook 'window-state-change-hook #'drop-check-for-recenter nil t)
 	  (setq cursor-type nil)
-	  )
-      (splash-screen-kill)))
+	  )))
 
   )
 
@@ -83,25 +82,28 @@
         string
       (format (format "%%%ds" padding) string))))
 
-(defun recenter-or-kill ()
-  "Recenter the splash screen or kill it if no longer visible"
-  (if (not (get-buffer-window "*splash*"))
-      (progn (remove-hook 'window-state-change-hook #'recenter-or-kill t)
-	     (message "Hook removed")
-	     (splash-screen-kill)
-	     (message "Buffer killed")
-	     )
-    (splash-screen-recenter)
+(defun drop-check-for-recenter ()
+  "Recenter the splash screens if any are visible"
+  (if (get-buffer-window " *splash*")
+      (if drop-update-delay
+	  (run-with-timer 0 'drop-update-delay 'drop-update)
+	(drop-update)
+	)
     )
   )
 
-(defun splash-screen-recenter ()
+(defun drop-update ()
+  "Update the content of the splash-screen"
+  (drop-recenter)
+  )
+
+(defun drop-recenter ()
   "Recenter splash screen"
-  (let* ((splash-buffer  (get-buffer-create "*splash*"))
-         (height         (round (- (window-body-height (get-buffer-window splash-buffer)) 3) ))
-         (width          (round (window-body-width (get-buffer-window splash-buffer))        ))
+  (let* ((drop-buffer  (get-buffer-create " *splash*"))
+         (height         (round (- (window-body-height (get-buffer-window drop-buffer)) 3) ))
+         (width          (round (window-body-width (get-buffer-window drop-buffer))        ))
          (padding-center (+ (/ height 2) 1)))
-  (with-current-buffer splash-buffer
+  (with-current-buffer drop-buffer
     (read-only-mode -1)
     (erase-buffer)
 
@@ -109,26 +111,17 @@
     
     ;; Vertical padding to center
     (insert-char ?\n padding-center)
-    (insert (propertize splash-screen-title 'face 'default))
+    (insert (propertize (drop-title) 'face 'default))
     (center-line)
     (insert "\n")
-    (insert (propertize (concat "v" (number-to-string emacs-major-version) "." (number-to-string emacs-minor-version)) 'face 'shadow))
+    (insert (propertize (drop-subtitle) 'face 'shadow))
     (center-line)
 
     (goto-char 0)
     (read-only-mode 1)
     (setq cursor-type nil)
-
     ))
   )
-
-(defun splash-screen-kill ()
-  "Kill the splash screen buffer (immediately)."
-  (if (get-buffer "*splash*")
-      (progn (message nil)
-             ;(kill-buffer "*splash*")
-	     )))
-
 
 ;; Install hook after frame parameters have been applied and only if
 ;; no option on the command line
@@ -139,7 +132,7 @@
          )
     (progn
       (add-hook 'window-setup-hook #'splash-screen)
-      (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+      ;;(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
       (put 'inhibit-startup-echo-area-message 'saved-value
 	   (setq inhibit-startup-echo-area-message (user-login-name)))
       (setq 

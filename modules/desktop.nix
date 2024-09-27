@@ -28,6 +28,7 @@
       signal-desktop-beta 
       libreoffice
       ungoogled-chromium 
+      obs-studio
     ];
     utils = with pkgs; [
 

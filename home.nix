@@ -19,6 +19,8 @@ in {
     ./modules/mime.nix
     ./modules/syncthing.nix
     ./modules/production.nix
+    ./modules/games.nix
+    ./modules/uni.nix
   ];
   home.packages = with pkgs; [];
 

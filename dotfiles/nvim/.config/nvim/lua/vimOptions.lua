@@ -32,6 +32,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	callback = function (_) 
 		vim.opt_local.scrolloff = 0
 		vim.opt_local.sidescrolloff = 0
+		vim.opt_local.nu = false
+		vim.opt_local.rnu = false
 		vim.cmd("startinsert")
 	end,
 })

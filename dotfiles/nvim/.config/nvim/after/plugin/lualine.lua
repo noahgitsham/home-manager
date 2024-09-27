@@ -47,12 +47,10 @@ require("lualine").setup {
 		globalstatus = true,
 	},
 	sections = {
-		lualine_a = {function ()
-        return mode_map[vim.api.nvim_get_mode().mode] or "__"
-    end},
-		lualine_b = {"branch", "diff"},
-		lualine_c = {"filename"},
-		lualine_x = {"encoding", "filetype"},
+		lualine_a = {},
+		lualine_b = {"filename"},
+		lualine_c = {"filetype", "branch", "diff"},
+		lualine_x = {"encoding"},
 		lualine_y = {"progress"},
 		lualine_z = {"location"}
 	},

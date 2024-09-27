@@ -65,6 +65,7 @@
   (setq evil-respect-visual-line-mode t)
   :config
   (evil-set-undo-system 'undo-redo)
+  (defun mouse-set-point (event &optional PROMOTE-TO-REGION))
   (setq scroll-step 1 ; Vim scrolling
   	scroll-margin 8 ; Scrolloff
         scroll-conservatively 101) ; Remove weird jumping
@@ -155,7 +156,7 @@
 ;;      	mode-line-modes mode-line-misc-info mode-line-end-spaces))
 
 ;; Header line
-(setq-default header-line-format
+(setq-default mode-line-format
 	      '("" header-line-indent
 		(:propertize
 		 ("" mode-line-modified)
@@ -204,7 +205,7 @@ end-of-buffer signals; pass the rest to the default handler."
 
 (use-package solaire-mode
   :init
-  (solaire-global-mode 0))
+  (solaire-global-mode 1))
 
 
 (defun steal-face-attribute (face attribute source &optional frame)
@@ -467,9 +468,9 @@ end-of-buffer signals; pass the rest to the default handler."
   (add-hook 'org-mode-hook 'olivetti-mode)
   :config
   (setq olivetti-style  'fancy)
-  ;;(steal-face-attribute 'olivetti-fringe :background 'menu)
-  (set-face-attribute 'olivetti-fringe nil :background "#282828")
-  ;;(set-face-attribute 'fringe nil :background "red")
+  ;;(set-face-attribute 'olivetti-fringe nil :background "#282828")
+  (add-to-list 'solaire-mode-remap-alist '(olivetti-fringe . solaire-default-face))
+  (add-to-list 'solaire-mode-remap-alist '(fringe . solaire-default-face))
   )
 
 

@@ -10,6 +10,10 @@
     #   rm share/applications/emacsclient.desktop
     #   '';
     # });
+    extraPackages = epkgs : with pkgs; [
+      texliveFull
+      python3
+    ];
   };
 
   # services.emacs = {

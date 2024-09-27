@@ -10,7 +10,8 @@
       rustup
       typescript
       ripgrep
-      # latex
+      tree-sitter
+      texlivePackages.latexmk
     ];
     defaultEditor = true;
   };
