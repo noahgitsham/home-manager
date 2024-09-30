@@ -83,7 +83,7 @@ cmp.setup {
 		{name = "luasnip"},
 		--{name = "nvim_lsp_signature_help"},
 		{name = "path"},
-		{name = "buffer", keyword_length = 5},
+		{name = "buffer", keyword_length = 3},
 	},
 	sorting = {
 		comparators = {

@@ -10,4 +10,4 @@ local function setColors(termColo, ttyColo)
 	-- Else default colorscheme
 end
 
-setColors("Tomorrow", "default")
+setColors("ayu-light", "default")

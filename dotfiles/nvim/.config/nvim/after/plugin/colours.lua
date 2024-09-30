@@ -15,7 +15,7 @@ require("gruvbox").setup {
 	},
 }
 
-vim.g.tundra_biome = "arctic"
+vim.g.tundra_biome = "alpine"
 require("nvim-tundra").setup {
 	plugins = {
 		lsp = true,

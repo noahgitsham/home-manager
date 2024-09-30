@@ -2,22 +2,19 @@
 {
   programs.emacs = {
     enable = true;
-    # package = pkgs.emacs.overrideAttrs ({ postInstall ? "", ... }: {
-    #   postInstall = postInstall + ''
-    #   ls
-    #   ls share
-    #   ls share/applications
-    #   rm share/applications/emacsclient.desktop
+    # package = pkgs.stdenv.mkDerivation rec {
+    #   pname = "emacs-clean-desktop-entries";
+    #   inherit (pkgs.emacs) version buildInputs propagatedBuildInputs;
+    #   dontBuild = true;
+    #   dontUnpack = true;
+    #   installPhase = ''
+    #   ${pkgs.rsync}/bin/rsync -ax --exclude "share/applications/.*[!emacs.desktop]" ${pkgs.emacs} $out
+    #   ${pkgs.tree}/bin/tree $out
     #   '';
-    # });
+    # };
     extraPackages = epkgs : with pkgs; [
       texliveFull
       python3
     ];
   };
-
-  # services.emacs = {
-    #   enable = true;
-    #   client.enable = true;
-    # };
   }

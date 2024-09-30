@@ -21,6 +21,7 @@ in {
     ./modules/production.nix
     ./modules/games.nix
     ./modules/uni.nix
+    ./modules/password-management.nix
   ];
   home.packages = with pkgs; [];
 
