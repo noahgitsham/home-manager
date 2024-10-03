@@ -11,6 +11,7 @@
     ripgrep
     lsix
     tree
+    unzip
 
     xdg-ninja
 

@@ -6,6 +6,7 @@
       swaybg
       libnotify
       swaynotificationcenter
+      gvfs
       bemenu
       bemoji
       wtype
@@ -29,6 +30,7 @@
       libreoffice
       ungoogled-chromium 
       obs-studio
+      element-desktop
     ];
     utils = with pkgs; [
 
