@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>ms", function () vim.api.nvim_command("Mason") end)
 
 require("mason-lspconfig").setup()
 
-local default_on_attach = function(client, bufnr)
+local default_on_attach = function(client,bufnr)
 	-- Mappings.
 	local bufopts = { noremap=true, silent=true, buffer=bufnr }
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -113,30 +113,6 @@ vim.keymap.set("n","<leader>er", ":Trouble diagnostics toggle<CR>")
 -- Vimtex
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_syntax_enabled = 0
-vim.g.vimtex_compiler_latexmk = { 
-	executable = "latexmk",
-	options = { 
-		"-xelatex",
-		"-file-line-error",
-		"-synctex=1",
-		"-interaction=nonstopmode",
-	},
-	aux_dir = function(_)
-		return vim.fn.expand("%:t:r")
-	end,
-	out_dir = function(_)
-		return vim.fn.expand("%:t:r")
-	end,
-	hooks = {
-		function ()
-			pdf_path = vim.fn.expand("%:p:r").."/"..vim.fn.expand("%:t:r")..".pdf"
-			print(pdf_path)
-			link_path = vim.fn.expand("%:p:h").."/"..vim.fn.expand("%:p:t:r")..".pdf"
-			print(link_path)
-			vim.uv.fs_symlink(pdf_path, link_path)
-		end
-	},
-}
 
 
 -- Fidget

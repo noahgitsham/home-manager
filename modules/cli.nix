@@ -11,13 +11,14 @@
     ripgrep
     lsix
     tree
-    unzip
 
     xdg-ninja
-
-    gh
-    gh-dash
   ];
+
+  programs.gh = {
+    enable = true;
+    extensions = [ pkgs.gh-dash ];
+  };
 
   programs.bat = {
     enable = true;

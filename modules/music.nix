@@ -5,5 +5,6 @@
 
     songrec
     spotify
+    blanket
   ];
 }

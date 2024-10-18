@@ -11,7 +11,7 @@
       typescript
       ripgrep
       tree-sitter
-      texliveFull
+      texlivePackages.latexmk
     ];
     defaultEditor = true;
   };

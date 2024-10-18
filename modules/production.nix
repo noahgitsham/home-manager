@@ -2,7 +2,6 @@
 let 
   plugins = with pkgs; [
     vital
-    helm
     surge-XT
   ];
 in {
@@ -10,5 +9,10 @@ in {
     ardour
     reaper
     mixxx
+    jamesdsp
   ] ++ plugins;
+
+  home.sessionVariables = {
+    LV2_PATH = "$HOME/.local/state/nix/profile/lib/lv2";
+  };
 }

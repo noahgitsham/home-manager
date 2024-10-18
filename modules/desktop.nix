@@ -1,21 +1,30 @@
 { pkgs, ... } :
 {
   home.packages = let
-    wayland-desktop-pkgs = with pkgs; [
+    hyprland-desktop-pkgs = with pkgs; [
       ags
       swaybg
       libnotify
       swaynotificationcenter
-      gvfs
       bemenu
       bemoji
       wtype
       j4-dmenu-desktop
       wl-clipboard
-      cliphist
+      (cliphist.overrideAttrs (_old: {
+        src = pkgs.fetchFromGitHub {
+          owner = "sentriz";
+          repo = "cliphist";
+          rev = "c49dcd26168f704324d90d23b9381f39c30572bd";
+          sha256 = "sha256-2mn55DeF8Yxq5jwQAjAcvZAwAg+pZ4BkEitP6S2N0HY=";
+        };
+        vendorHash = "sha256-M5n7/QWQ5POWE4hSCMa0+GOVhEDCOILYqkSYIGoy/l0=";
+      }))
       hyprpicker
       grim
       slurp
+      lxqt.lxqt-policykit
+      wlsunset
     ];
     desktop-programs = with pkgs; [
       librewolf
@@ -30,13 +39,17 @@
       libreoffice
       ungoogled-chromium 
       obs-studio
+<<<<<<< HEAD
       element-desktop
+      freetube
+=======
+>>>>>>> parent of 705adfd (Update)
     ];
     utils = with pkgs; [
 
     ];
   in []
-  ++ wayland-desktop-pkgs
+  ++ hyprland-desktop-pkgs
   ++ desktop-programs;
 
   xdg.configFile."hypr/hyprland.conf".enable = false;

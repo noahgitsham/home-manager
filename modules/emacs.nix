@@ -13,8 +13,9 @@
     #   '';
     # };
     extraPackages = epkgs : with pkgs; [
-      texliveFull
       python3
     ];
   };
-  }
+
+  home.packages = [ pkgs.texliveFull ];
+}

@@ -1,8 +1,5 @@
-{ config, lib, ... } : {
-	stowFiles = attrs :
-		lib.mapAttrs ( base : pathslist : 
-        map ( path : builtins.trace path {
-          path.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles" + base + path;
-        }
-				) pathslist ) attrs;
-}
+{ lib, config, ... } : basepath : pathsSets : 
+builtins.listToAttrs (concatMap ( path : {
+  name = path;
+  value = lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/.config/nvim";
+} ) pathsSets )

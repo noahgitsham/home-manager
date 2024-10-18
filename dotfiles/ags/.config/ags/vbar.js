@@ -2,6 +2,7 @@ import App from 'resource:///com/github/Aylur/ags/app.js';
 import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 import Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import Network from 'resource:///com/github/Aylur/ags/service/network.js';
 
 
 // Constants
@@ -101,6 +102,27 @@ const Workspaces = () => Widget.Box({
 		)
 	),
 });
+
+
+const con = () => Widget.Box({
+	class_name: "widget-box padded-box",
+	height_request: 48,
+	vertical: true,
+	hpack: "fill",
+	child: CPUPercent()
+});
+
+const nw = () => Widget.Label({
+	hexpand: true,
+	hpack: "center",
+	justification: "center",
+	setup: self => self.poll(1000,
+		self => Utils.execAsync(`${App.configDir}/scripts/cpu-usage.sh`)
+		.then(cpuuse => self.label = `CPU\n${cpuuse}`)
+		.catch(err => print(err))
+	),
+})
+
 
 const CPUWidget = () => Widget.Box({
 	class_name: "widget-box padded-box",
