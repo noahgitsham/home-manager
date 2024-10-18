@@ -39,11 +39,8 @@
       libreoffice
       ungoogled-chromium 
       obs-studio
-<<<<<<< HEAD
       element-desktop
       freetube
-=======
->>>>>>> parent of 705adfd (Update)
     ];
     utils = with pkgs; [
 
