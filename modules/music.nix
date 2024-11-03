@@ -5,6 +5,7 @@
 
     songrec
     spotify
+    ncspot
     blanket
   ];
 }

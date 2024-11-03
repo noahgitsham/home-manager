@@ -1,7 +1,10 @@
 require("telescope").setup {
 	defaults = {
 		path_display = { filename_first = true },
-	}
+	},
+	pickers = {
+		follow = true,
+	},
 }
 
 local builtin = require('telescope.builtin')

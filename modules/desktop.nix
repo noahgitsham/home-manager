@@ -41,6 +41,7 @@
       obs-studio
       element-desktop
       freetube
+      dolphin
     ];
     utils = with pkgs; [
 
@@ -52,6 +53,8 @@
   xdg.configFile."hypr/hyprland.conf".enable = false;
   xdg.configFile."hypr/hypridle.conf".enable = false;
   xdg.configFile."emacs/init.el".enable = false;
+
+  # systemd.user.sessionVariables = {}
 
   wayland.windowManager.hyprland = {
     enable = true;

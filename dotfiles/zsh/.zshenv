@@ -3,7 +3,6 @@ export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 export TERMINAL="foot"
 export TERM="foot"
-export BROWSER="firefox"
 
 #XDG
 export XDG_DATA_HOME=$HOME/.local/share

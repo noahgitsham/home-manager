@@ -25,7 +25,7 @@ in {
     ./modules/uni.nix
     ./modules/password-management.nix
   ];
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ zoom-us ];
 
   nixpkgs.config.allowUnfree = true;
 

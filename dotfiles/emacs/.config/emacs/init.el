@@ -339,6 +339,22 @@ end-of-buffer signals; pass the rest to the default handler."
   ;; Capture
   (setq org-capture-templates '())
 
+  ;; Templates
+  (require 'org-tempo)
+  ;;(add-to-list 'org-modules 'org-tempo t)
+
+  (tempo-define-template "latex-equation"
+               '("\\begin{equation}\n" p "\n\\end{equation}" >)
+               "<me"
+               "Insert a latex equation")
+  (tempo-define-template "aligned-latex-equation"
+               '("\\begin{align}\n\\begin{split}\n" p "\n\\end{split}\n\\end{align}" >)
+               "<ma"
+               "Insert a latex equation")
+
+  ;(add-to-list 'org-tempo-tags
+  ;	       '("<me" . tempo-template-latex-equation))
+
   ;; Babel
   (org-babel-do-load-languages
    'org-babel-load-languages '((C . t)

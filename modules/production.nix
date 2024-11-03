@@ -12,7 +12,7 @@ in {
     jamesdsp
   ] ++ plugins;
 
-  home.sessionVariables = {
+  systemd.user.sessionVariables = {
     LV2_PATH = "$HOME/.local/state/nix/profile/lib/lv2";
   };
 }
