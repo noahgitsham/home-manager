@@ -102,7 +102,7 @@
 (use-package doom-themes
   :init
   (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'doom-tomorrow-day t)
+  ;(load-theme 'doom-tomorrow-day t)
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -275,7 +275,8 @@ end-of-buffer signals; pass the rest to the default handler."
 
   ;; LaTeX Fragments
   (with-eval-after-load 'org
-    (add-to-list 'org-latex-packages-alist '("" "amssymb" t) '("" "amsmath" t)))
+    (add-to-list 'org-latex-packages-alist '("" "amssymb" t))
+    (add-to-list 'org-latex-packages-alist '("" "amsmath" t)))
   (add-hook 'org-mode-hook 'org-latex-preview-auto-mode)
   (setq org-latex-preview-numbered t
 	org-latex-preview-live t

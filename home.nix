@@ -41,8 +41,8 @@ in {
   # };
 
   home.file = {
-    ".zshrc".source = ./dotfiles/zsh/.zshrc;
-    ".zshenv".source = ./dotfiles/zsh/.zshenv;
+    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/zsh/.zshrc";
+    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/zsh/.zshenv";
     # ".config/nvim".source = ./dotfiles/nvim/.config/nvim;
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/.config/nvim";
     ".config/foot".source = ./dotfiles/foot/.config/foot;

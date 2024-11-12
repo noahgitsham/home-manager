@@ -1,4 +1,4 @@
-#zmodload zsh/zprof
+# zmodload zsh/zprof
 # History
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
@@ -23,12 +23,17 @@ KEYTIMEOUT=1
 
 # Completion
 zstyle :compinstall filename '~/.zshrc'
-
-# Completion
 autoload -Uz compinit
 # XDG
 mkdir -p "$XDG_CACHE_HOME"/zsh
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+#Cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh"
+
+# Completion style
+zstyle ':completion:*' completer _complete _approximate
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}did you mean:%f'
 
 
 # Custom prompt
@@ -90,6 +95,7 @@ elif [ $zsh_OS = "nixos" ]; then
 	rehash_precmd() {
 		local new_build="$(readlink /run/current-system)"
 		if [ "$zsh_system_build" != "$new_build" ]; then
+			echo "HELLO"
 			echo $zsh_system_build
 			echo $new_build
 			rehash
@@ -99,15 +105,10 @@ elif [ $zsh_OS = "nixos" ]; then
 	add-zsh-hook -Uz precmd rehash_precmd
 fi
 
-
-
 # OSC 133
 precmd() {
     print -Pn "\e]133;A\e\\"
 }
-
-# Syntax Highlighting
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # Aliases
@@ -142,4 +143,4 @@ lfcd () {
     cd "$(command lf -print-last-dir "$@")"
 }
 
-#zprof
+# zprof

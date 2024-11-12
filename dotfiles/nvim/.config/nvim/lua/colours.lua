@@ -1,13 +1,13 @@
 vim.opt.termguicolors = true
 
 -- Set colour scheme
-local function setColors(termColo, ttyColo)
+local function setColours(termColo, ttyColo)
 	if os.getenv("DISPLAY") then
 		vim.cmd.colorscheme(termColo)
 	elseif ttyColo then
 		vim.cmd.colorscheme(ttyColo)
 	end
-	-- Else default colorscheme
+	-- Else default colourscheme
 end
 
-setColors("Tomorrow", "default")
+setColours("Tomorrow", "default")

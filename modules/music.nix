@@ -7,5 +7,7 @@
     spotify
     ncspot
     blanket
+
+    nicotine-plus
   ];
 }

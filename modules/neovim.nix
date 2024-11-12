@@ -2,16 +2,17 @@
   programs.neovim = {
     enable = true;
     extraPackages = with pkgs; [
-      python3
-      nodejs
-      gcc
       clang
-      unzip
-      rustup
-      typescript
+      gcc
+      nodejs
+      python3
       ripgrep
-      tree-sitter
+      rustup
       texlivePackages.latexmk
+      tree-sitter
+      typescript
+      unixtools.xxd
+      unzip
     ];
     defaultEditor = true;
   };

@@ -1,18 +1,17 @@
 { pkgs, ... } : {
   home.packages = with pkgs; [
-    lf
-    xdragon
-    chafa
-    file
-    ffmpeg
-
     btop
+    chafa
+    ffmpeg
+    file
     fzf
-    ripgrep
+    lf
     lsix
+    ripgrep
     tree
-
+    wget
     xdg-ninja
+    xdragon
   ];
 
   programs.gh = {
@@ -22,5 +21,8 @@
 
   programs.bat = {
     enable = true;
+    config = {
+      theme = "ansi";
+    };
   };
 }

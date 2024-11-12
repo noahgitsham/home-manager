@@ -3,45 +3,38 @@
   home.packages = let
     hyprland-desktop-pkgs = with pkgs; [
       ags
-      swaybg
-      libnotify
-      swaynotificationcenter
       bemenu
       bemoji
-      wtype
-      j4-dmenu-desktop
-      wl-clipboard
-      (cliphist.overrideAttrs (_old: {
-        src = pkgs.fetchFromGitHub {
-          owner = "sentriz";
-          repo = "cliphist";
-          rev = "c49dcd26168f704324d90d23b9381f39c30572bd";
-          sha256 = "sha256-2mn55DeF8Yxq5jwQAjAcvZAwAg+pZ4BkEitP6S2N0HY=";
-        };
-        vendorHash = "sha256-M5n7/QWQ5POWE4hSCMa0+GOVhEDCOILYqkSYIGoy/l0=";
-      }))
-      hyprpicker
+      cliphist
       grim
-      slurp
+      hyprpicker
+      j4-dmenu-desktop
+      libnotify
       lxqt.lxqt-policykit
+      slurp
+      swaybg
+      swaynotificationcenter
+      wl-clipboard
       wlsunset
+      wtype
     ];
     desktop-programs = with pkgs; [
-      librewolf
-      zathura
-      (mpv-unwrapped.override { sixelSupport=true; })
-      imv
-      gnome-decoder
       cheese
-      mepo 
-      stremio
-      signal-desktop-beta 
-      libreoffice
-      ungoogled-chromium 
-      obs-studio
+      xfce.thunar
       element-desktop
       freetube
-      dolphin
+      gnome-decoder
+      imv
+      libreoffice
+      librewolf
+      mepo 
+      (mpv-unwrapped.override { sixelSupport=true; })
+      obs-studio
+      qbittorrent
+      signal-desktop-beta 
+      stremio
+      ungoogled-chromium 
+      zathura
     ];
     utils = with pkgs; [
 
