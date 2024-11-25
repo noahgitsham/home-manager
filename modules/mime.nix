@@ -1,38 +1,53 @@
 {
   xdg.mimeApps = let 
-    image-viewer = "imv.desktop";
+    browsers = ["librewolf.desktop" "firefox.desktop" "chromium-browser.desktop"];
+    image-viewers = ["imv-dir.desktop"] ++ browsers;
+    text-editors = ["nvim.dekstop" "emacs.desktop" "nano.desktop"];
+    video-players = ["mpv.desktop"] ++ browsers;
+    audio-players = ["mpv.desktop"] ++ browsers;
   in {
     enable = true;
     defaultApplications = {
       "text/*" = ["neovim.desktop"];
-      "text/org" = ["emacs.desktop"];
+      "text/org" = ["emacs.desktop" "neoim.desktop"];
       "application/pdf" = ["org.pwmt.zathura.desktop"];
-      "x-scheme-handler/http" = ["librewolf.desktop"];
-      "text/html" = ["librewolf.desktop"];
-      "text/xml" = ["librewolf.desktop"];
-      "application/xhtml_xml" = ["librewolf.desktop"];
-      "image/bmp" = [image-viewer];
-      "image/gif" = [image-viewer];
-      "image/jpeg" = [image-viewer];
-      "image/jpg" = [image-viewer];
-      "image/pjpeg" = [image-viewer];
-      "image/png" = [image-viewer];
-      "image/tiff" = [image-viewer];
-      "image/x-bmp" = [image-viewer];
-      "image/x-pcx" = [image-viewer];
-      "image/x-png" = [image-viewer];
-      "image/x-portable-anymap" = [image-viewer];
-      "image/x-portable-bitmap" = [image-viewer];
-      "image/x-portable-graymap" = [image-viewer];
-      "image/x-portable-pixmap" = [image-viewer];
-      "image/x-tga" = [image-viewer];
-      "image/x-xbitmap" = [image-viewer];
-      "image/heif" = [image-viewer];
-      "image/avif" = [image-viewer];
+      "x-scheme-handler/http" = browsers;
+      "text/html" = browsers;
+      "text/xml" = browsers;
+      "application/xhtml_xml" = browsers;
 
-      "image/webp" = ["librewolf.desktop"];
-      "x-scheme-handler/https" = ["librewolf.desktop"];
-      "x-scheme-handler/ftp" = ["librewolf.desktop"];
+      "image/avif" = image-viewers;
+      "image/bmp" = image-viewers;
+      "image/gif" = image-viewers;
+      "image/heif" = image-viewers;
+      "image/jpeg" = image-viewers;
+      "image/jpg" = image-viewers;
+      "image/pjpeg" = image-viewers;
+      "image/png" = image-viewers;
+      "image/tiff" = image-viewers;
+      "image/x-bmp" = image-viewers;
+      "image/x-pcx" = image-viewers;
+      "image/x-png" = image-viewers;
+      "image/x-portable-anymap" = image-viewers;
+      "image/x-portable-bitmap" = image-viewers;
+      "image/x-portable-graymap" = image-viewers;
+      "image/x-portable-pixmap" = image-viewers;
+      "image/x-tga" = image-viewers;
+      "image/x-xbitmap" = image-viewers;
+
+      "audio/x-wav" = audio-players;
+      "audio/mpeg" = audio-players;
+      "audio/mp3" = audio-players;
+      "audio/mp4" = audio-players;
+      "audio/ogg" = audio-players;
+      "audio/flac" = audio-players;
+
+      "video/*" = video-players;
+
+      "image/webp" = browsers;
+      "x-scheme-handler/https" = browsers;
+      "x-scheme-handler/ftp" = browsers;
+
       "inode/directory" = ["thunar.desktop" "lf.desktop"];
     };
   };

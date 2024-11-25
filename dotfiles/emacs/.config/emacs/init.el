@@ -6,7 +6,7 @@
 			     (string-to-number (emacs-init-time))))))
 
 ;; Package Manager
-(defvar elpaca-installer-version 0.7)
+(defvar elpaca-installer-version 0.8)
 (defvar elpaca-directory (expand-file-name "elpaca/" emacs-data-path))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
@@ -23,18 +23,18 @@
     (make-directory repo t)
     (when (< emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
-        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-                 ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-                                                 ,@(when-let ((depth (plist-get order :depth)))
-                                                     (list (format "--depth=%d" depth) "--no-single-branch"))
-                                                 ,(plist-get order :repo) ,repo))))
-                 ((zerop (call-process "git" nil buffer t "checkout"
-                                       (or (plist-get order :ref) "--"))))
-                 (emacs (concat invocation-directory invocation-name))
-                 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-                                       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-                 ((require 'elpaca))
-                 ((elpaca-generate-autoloads "elpaca" repo)))
+        (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                  ,@(when-let* ((depth (plist-get order :depth)))
+                                                      (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                  ,(plist-get order :repo) ,repo))))
+                  ((zerop (call-process "git" nil buffer t "checkout"
+                                        (or (plist-get order :ref) "--"))))
+                  (emacs (concat invocation-directory invocation-name))
+                  ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                        "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                  ((require 'elpaca))
+                  ((elpaca-generate-autoloads "elpaca" repo)))
             (progn (message "%s" (buffer-string)) (kill-buffer buffer))
           (error "%s" (with-current-buffer buffer (buffer-string))))
       ((error) (warn "%s" err) (delete-directory repo 'recursive))))
@@ -44,6 +44,7 @@
     (load "./elpaca-autoloads")))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
+
 
 ;; Install use-package support
 (elpaca elpaca-use-package
@@ -102,7 +103,7 @@
 (use-package doom-themes
   :init
   (setq doom-gruvbox-dark-variant "hard")
-  ;(load-theme 'doom-tomorrow-day t)
+  (load-theme 'doom-tomorrow-day t)
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -361,7 +362,8 @@ end-of-buffer signals; pass the rest to the default handler."
    'org-babel-load-languages '((C . t)
 			       (python . t)
 			       (shell . t)
-			       (emacs-lisp . t)))
+			       (emacs-lisp . t)
+			       (haskell . t)))
   (setq org-confirm-babel-evaluate nil)
   ;(setq org-babel-default-header-args '(:results "output"))
 
@@ -505,6 +507,12 @@ end-of-buffer signals; pass the rest to the default handler."
 ;; Runtime profiling
 (global-set-key (kbd "M-p") 'profiler-start)
 (global-set-key (kbd "M-P") 'profiler-stop)
+
+;; Disable obsolete function compilerwarnings
+(eval-when-compile
+  (dolist (sym '(cl-flet lisp-complete-symbol))
+    (setplist sym (use-package-plist-delete
+                   (symbol-plist sym) 'byte-obsolete-info))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom Set Variables ;;

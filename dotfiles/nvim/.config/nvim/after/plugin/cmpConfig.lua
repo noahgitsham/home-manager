@@ -30,7 +30,9 @@ cmp.setup {
 		format = function(entry, vim_item)
 			-- Format Kinds
 			vim_item.kind = cmp_kinds[vim_item.kind] or vim_item.kind
-			vim_item.kind = "[" .. string.upper(vim_item.kind) .. "]"
+			if vim_item.kind then
+				vim_item.kind = "[" .. string.upper(vim_item.kind) .. "]"
+			end
 
 			-- Format main text
 			if string.len(vim_item.abbr) > maxEntryWidth then

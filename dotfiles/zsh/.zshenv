@@ -2,7 +2,6 @@
 export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 export TERMINAL="foot"
-export TERM="foot"
 
 #XDG
 export XDG_DATA_HOME=$HOME/.local/share
@@ -17,9 +16,6 @@ export PATH
 
 # Directories
 export VST_PATH=/usr/lib/vst/
-
-# Wine
-export ABLETON_DIR="$HOME/software/wine/Ableton/drive_c/ProgramData/Ableton/Live 11 Suite/"
 
 # Fuck you microsoft
 export DOTNET_CLI_TELEMETRY_OPTOUT=1

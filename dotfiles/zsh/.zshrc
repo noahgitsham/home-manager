@@ -28,8 +28,8 @@ autoload -Uz compinit
 mkdir -p "$XDG_CACHE_HOME"/zsh
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 #Cache
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh"
+# zstyle ':completion:*' use-cache on
+# zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh"
 
 # Completion style
 zstyle ':completion:*' completer _complete _approximate
@@ -51,6 +51,9 @@ make_prompt() {
 			*) local color=blue ;;
 		esac
 		PROMPT+="%F{$color}${vcs_info_msg_0_}%f "
+	fi
+	if [[ -n "$IN_NIX_SHELL" ]]; then
+		PROMPT+="%F{blue}N%f "
 	fi
 	PROMPT+="%F{gray}$%f "
 }
@@ -95,9 +98,9 @@ elif [ $zsh_OS = "nixos" ]; then
 	rehash_precmd() {
 		local new_build="$(readlink /run/current-system)"
 		if [ "$zsh_system_build" != "$new_build" ]; then
-			echo "HELLO"
-			echo $zsh_system_build
-			echo $new_build
+			# echo "HELLO"
+			# echo $zsh_system_build
+			# echo $new_build
 			rehash
 			zsh_system_build="$new_build"
 		fi

@@ -8,7 +8,10 @@
     lf
     lsix
     ripgrep
+    p7zip
+    tokei
     tree
+    unzip
     wget
     xdg-ninja
     xdragon

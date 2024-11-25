@@ -9,6 +9,13 @@ import Network from 'resource:///com/github/Aylur/ags/service/network.js';
 const gridSize = 8;
 const gaps = gridSize;
 
+const Logo = () => Widget.Box({
+	class_name: "widget-box",
+	height_request: 72,
+	vertical: true,
+	hpack: "fill",
+	child: Time()
+})
 
 const Clock = () => Widget.Box({
 	class_name: "widget-box",
