@@ -38,15 +38,17 @@
       (mpv-unwrapped.override { sixelSupport=true; })
       obs-studio
       qbittorrent
+      scrcpy
       signal-desktop-beta 
       stremio
+      tor-browser
       ungoogled-chromium 
       zathura
     ];
     utils = with pkgs; [
 
     ];
-  in []
+  in with pkgs; [ xorg.xinit bspwm sxhkd kitty ]
   ++ hyprland-desktop-pkgs
   ++ desktop-programs;
 
@@ -61,4 +63,13 @@
   #   xwayland.enable = true;
   #   systemd.enable = false;
   # };
+
+  home.file = {
+    ".config/xinitrc" = {
+      text = ''
+      ${pkgs.sxhkd}/bin/sxhkd &
+      exec ${pkgs.bspwm}/bin/bspwm
+      '';
+    };
+  };
 }

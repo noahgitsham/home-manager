@@ -4,13 +4,16 @@ let
     vital
     surge-XT
   ];
-in {
-  home.packages = with pkgs; [
+  workspaces = with pkgs; [
     ardour
+    audacity
     reaper
     mixxx
+  ];
+in {
+  home.packages = with pkgs; [
     jamesdsp
-  ] ++ plugins;
+  ] ++ workspaces ++ plugins;
 
   systemd.user.sessionVariables = {
     LV2_PATH = "$HOME/.local/state/nix/profile/lib/lv2";

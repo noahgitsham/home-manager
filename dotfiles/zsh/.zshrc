@@ -93,16 +93,16 @@ if [ "$zsh_OS" = "arch" ]; then
 	add-zsh-hook -Uz precmd rehash_precmd
 
 elif [ $zsh_OS = "nixos" ]; then
-	zsh_system_build="$(readlink /run/current-system)"
+	nixos_build="$(readlink /run/current-system)"
+	hm_build="$(readlink ~/.local/state/nix/profiles/profile)"
 	autoload -Uz add-zsh-hook
 	rehash_precmd() {
-		local new_build="$(readlink /run/current-system)"
-		if [ "$zsh_system_build" != "$new_build" ]; then
-			# echo "HELLO"
-			# echo $zsh_system_build
-			# echo $new_build
+		local new_nixos_build="$(readlink /run/current-system)"
+		local new_hm_build="$(readlink ~/.local/state/nix/profiles/profile)"
+		if [ "$nixos_build" != "$new_nixos_build" ] || [ "$hm_build" != "$new_hm_build" ]; then
 			rehash
-			zsh_system_build="$new_build"
+			zsh_system_build="$new_nixos_build"
+			hm_system_build="$new_hm_build"
 		fi
 	}
 	add-zsh-hook -Uz precmd rehash_precmd

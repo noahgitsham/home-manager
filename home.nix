@@ -24,6 +24,7 @@ in {
     ./modules/games.nix
     ./modules/uni.nix
     ./modules/password-management.nix
+    ./modules/custom.nix
   ];
   home.packages = with pkgs; [ zoom-us ];
 
@@ -51,6 +52,9 @@ in {
     ".config/ags".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/ags/.config/ags";
     ".config/emacs".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/emacs/.config/emacs";
     ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/hypr/.config/hypr";
+
+    ".config/bspwm".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/bspwm/.config/bspwm";
+    ".config/sxhkd".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/sxhkd/.config/sxhkd";
 
     ".config/user-dirs.dirs".source   = ./dotfiles/user-dirs/.config/user-dirs.dirs;
     ".config/user-dirs.locale".source = ./dotfiles/user-dirs/.config/user-dirs.locale;

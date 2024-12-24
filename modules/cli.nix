@@ -1,6 +1,7 @@
 { pkgs, ... } : {
   home.packages = with pkgs; [
     btop
+    bc
     chafa
     ffmpeg
     file
@@ -15,6 +16,7 @@
     wget
     xdg-ninja
     xdragon
+    zip
   ];
 
   programs.gh = {

@@ -67,11 +67,15 @@ vim.opt.cursorline = true
 vim.g.netrw_liststyle = 1 -- Tree
 vim.g.netrw_fastbrowse = 0
 
+-- Restore last position
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Open file at the last position",
   pattern = '*',
   command = 'silent! normal! g`"zv'
 })
+
+-- Persistent undo tree
+vim.opt.undofile = true
 
 -- Spellcheck
 vim.opt.spelllang = "en_gb"

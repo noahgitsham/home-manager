@@ -45,7 +45,7 @@ end
 local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
-vim.g.python_recommended_style = 0
+vim.g.python_recommended_style = 1
 require("mason-lspconfig").setup_handlers {
 	function(server_name)
 		lspconfig[server_name].setup {
@@ -66,7 +66,7 @@ require("mason-lspconfig").setup_handlers {
 			},
 			capabilities = default_capabilities,
 		}
-		vim.g.python_recommended_style = 0
+		vim.g.python_recommended_style = 1
 	end,
 
 	["clangd"] = function ()

@@ -80,6 +80,7 @@ return {
 	"sjl/badwolf",
 	"sam4llis/nvim-tundra",
 	"rktjmp/lush.nvim",
+	"jeffkreeftmeijer/vim-dim",
 
 	-- Misc
 	"ThePrimeagen/vim-be-good",
