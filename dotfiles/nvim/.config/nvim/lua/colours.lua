@@ -1,4 +1,4 @@
-vim.opt.termguicolors = false
+vim.opt.termguicolors = true
 
 -- Set colour scheme
 local function setColours(termColo, ttyColo)
@@ -11,4 +11,4 @@ local function setColours(termColo, ttyColo)
 end
 
 -- setColours("Tomorrow", "default")
-setColours("dim", "default")
+setColours("tomorrow")

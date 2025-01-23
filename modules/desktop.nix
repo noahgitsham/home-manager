@@ -32,17 +32,16 @@
       gnome-solanum
       imv
       libreoffice
-      librewolf
+      # librewolf
       webcamoid
       mepo 
       (mpv-unwrapped.override { sixelSupport=true; })
       obs-studio
       qbittorrent
       scrcpy
-      signal-desktop-beta 
+      signal-desktop
       stremio
       tor-browser
-      ungoogled-chromium 
       zathura
     ];
     utils = with pkgs; [

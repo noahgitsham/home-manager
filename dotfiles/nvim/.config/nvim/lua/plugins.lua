@@ -61,7 +61,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	"lukas-reineke/indent-blankline.nvim",
 	"Aasim-A/scrollEOF.nvim",
-	"NvChad/nvim-colorizer.lua",
+	"catgoose/nvim-colorizer.lua",
 	"folke/zen-mode.nvim",
 	"folke/twilight.nvim",
 	"amarakon/nvim-unfocused-cursor",
@@ -110,5 +110,6 @@ return {
 	--},
 
 	-- Local Plugins
-	{"pluginbynoah/inbar.nvim", dev = true },
+	{ "pluginbynoah/inbar.nvim", dev = true },
+	{ "tomorrow-day.nvim", dev = true },
 }

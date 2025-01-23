@@ -59,6 +59,7 @@ export WINEPREFIX="$XDG_DATA_HOME"/wine
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+export PYTHON_HISTORY="${XDG_DATA_HOME}/python/history"
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
