@@ -46,6 +46,7 @@ export BEMENU_OPTS="--ifne \
 
 
 # XDG User #Directories
+[ -d "$XDG_STATE_HOME"/zsh ] || mkdir "$XDG_STATE_HOME"/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export ANDROID_HOME="$XDG_DATA_HOME"/android
 export CARGO_HOME="$XDG_DATA_HOME"/cargo

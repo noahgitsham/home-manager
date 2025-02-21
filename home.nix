@@ -41,20 +41,22 @@ in {
   #   "bspwm" = [ ".config/bspwm/bspwmrc" ];
   # };
 
-  home.file = {
-    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/zsh/.zshrc";
-    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/zsh/.zshenv";
-    # ".config/nvim".source = ./dotfiles/nvim/.config/nvim;
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/.config/nvim";
-    ".config/foot".source = ./dotfiles/foot/.config/foot;
-    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/tmux/.config/tmux";
-    ".local/share/tmux/plugins/tpm".source = fetchGit { url = "https://github.com/tmux-plugins/tpm"; rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946"; };
-    ".config/ags".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/ags/.config/ags";
-    ".config/emacs".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/emacs/.config/emacs";
-    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/hypr/.config/hypr";
+  home.file = let
+    dotfiles-dir = "${config.home.homeDirectory}/.config/home-manager/dotfiles";
+  in {
+    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshrc";
+    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshenv";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/nvim/.config/nvim";
+    ".config/foot".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/foot/.config/foot";
+    ".config/ags".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/ags/.config/ags";
+    ".config/emacs".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/emacs/.config/emacs";
+    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/hypr/.config/hypr";
 
-    ".config/bspwm".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/bspwm/.config/bspwm";
-    ".config/sxhkd".source = config.lib.file.mkOutOfStoreSymlink "/home/noah/.config/home-manager/dotfiles/sxhkd/.config/sxhkd";
+    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/tmux/.config/tmux";
+    ".local/share/tmux/plugins/tpm".source = fetchGit { url = "https://github.com/tmux-plugins/tpm"; rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946"; };
+
+    ".config/bspwm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/bspwm/.config/bspwm";
+    ".config/sxhkd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/sxhkd/.config/sxhkd";
 
     ".config/user-dirs.dirs".source   = ./dotfiles/user-dirs/.config/user-dirs.dirs;
     ".config/user-dirs.locale".source = ./dotfiles/user-dirs/.config/user-dirs.locale;

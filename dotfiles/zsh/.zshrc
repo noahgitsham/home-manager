@@ -8,7 +8,7 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt histignorealldups
 HISTSIZE=50000
-SAVEHIST=50000
+SAVEHIST=40000
 
 # Set the default WORDCHARS
 WORDCHARS='*?_[]~=&;|!#$%^(){}<>'
@@ -44,7 +44,8 @@ autoload -Uz vcs_info
 precmd_functions+=( vcs_info )
 
 make_prompt() {
-	PROMPT="%F{yellow}%n%f "
+	# PROMPT="%F{yellow}%n%f "
+	PROMPT=""
 	if [[ -n ${vcs_info_msg_0_} ]] then
 		case ${vcs_info_msg_0_} in
 			"main"|"master") local color=magenta ;;
@@ -67,15 +68,7 @@ zstyle ":vcs_info:git:*" check-for-changes true
 zstyle ":vcs_info:git:*" formats "%b" # %u %c
 
 
-#eval "$(starship init zsh)"
-
-# Autofill
-#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
-
 # Rehash after package install
-
-
 zsh_OS=$(grep -Po "(?<=^ID=).*(?=$)" /etc/os-release)
 if [ "$zsh_OS" = "arch" ]; then
 	zshcache_time="$(date +%s%N)"
@@ -120,8 +113,6 @@ alias less="less --color=always | less -R"
 alias tree="tree -C"
 alias tmuxa="tmux a || tmux"
 
-#alias emacs="emacs -nw"
-
 INITIAL_QUERY="${*:-}"
 RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
 alias fzrg=": | fzf --ansi --disabled --query \"$INITIAL_QUERY\" \
@@ -140,10 +131,5 @@ alias fzrgh=": | fzf --ansi --disabled --query \"$INITIAL_QUERY\" \
     --preview 'bat --color=always {1} --highlight-line {2}' \
     --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
     --bind 'enter:become(nvim {1} +{2})'"
-
-lfcd () {
-    # `command` is needed in case `lfcd` is aliased to `lf`
-    cd "$(command lf -print-last-dir "$@")"
-}
 
 # zprof

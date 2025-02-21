@@ -1,8 +1,4 @@
 -- Indiviual colour scheme configuration
-require("ayu").setup {
-	mirage = false
-}
-
 require("gruvbox").setup {
 	contrast = "hard",
 	invert_selection = true,
@@ -12,19 +8,5 @@ require("gruvbox").setup {
 		SignColumn = { bg = "None" },
 		CursorLineSign = { link = "CursorLine" },
 		Visual = {  }
-	},
-}
-
-vim.g.tundra_biome = "alpine"
-require("nvim-tundra").setup {
-	plugins = {
-		lsp = true,
-		semantic_tokens = true,
-		treesitter = true,
-		telescope = true,
-		cmp = true,
-		gitsigns = true,
-		neogit = true,
-		textfsm = true,
 	},
 }

@@ -4,6 +4,14 @@ require("gitsigns").setup {
 		vim.keymap.set("n", "<leader>gd", function() vim.cmd("Gitsigns diffthis") end)
 		vim.keymap.set("n", "<leader>gp", function() vim.cmd("Gitsigns preview_hunk_inline") end)
 		vim.keymap.set("n", "<leader>gu", function() vim.cmd("Gitsigns undo_stage_hunk") end)
-	end
+	end,
+	signs = {
+		add          = { text = '+' },
+		change       = { text = '|' },
+		delete       = { text = '_' },
+		topdelete    = { text = '‾' },
+		changedelete = { text = '~' },
+		untracked    = { text = '┆' },
+	},
 }
 

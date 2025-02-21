@@ -91,7 +91,14 @@ require("mason-lspconfig").setup_handlers {
 		}
 	end,
 
-	["jdtls"] = function () end
+	["jdtls"] = function () 
+		lspconfig["jdtls"].setup {
+			on_attach = default_on_attach,
+			settings = {
+			},
+			capabilities = default_capabilities,
+		}
+	end
 }
 
 -- Trouble

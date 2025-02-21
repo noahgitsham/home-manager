@@ -157,7 +157,7 @@
 ;;      	mode-line-modes mode-line-misc-info mode-line-end-spaces))
 
 ;; Header line
-(setq-default mode-line-format
+(setq-default header-line-format
 	      '("" header-line-indent
 		(:propertize
 		 ("" mode-line-modified)
