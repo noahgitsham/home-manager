@@ -2,7 +2,7 @@
 @define-color fg #4D4D4C; /*#A89984;*/
 
 * {
-	font-family: Terminus;
+	font-family: CommitMono, monospace;
 }
 
 .bar {

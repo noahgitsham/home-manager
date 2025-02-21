@@ -3,7 +3,6 @@
   home.packages = let
 
     hyprland-desktop-pkgs = with pkgs; [
-      ags
       bemenu
       bemoji
       cliphist
