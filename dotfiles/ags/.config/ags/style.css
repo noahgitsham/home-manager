@@ -1,5 +1,6 @@
 @define-color bg #FAFAFA; /*#1D2021;*/
 @define-color fg #4D4D4C; /*#A89984;*/
+@define-color cg #83988F; /*#A89984;*/
 
 * {
 	font-family: CommitMono, monospace;
@@ -11,7 +12,7 @@
 }
 
 .widget-box {
-	background: @bg;
+	background-color: @bg;
 	color: @fg;
 }
 
@@ -41,13 +42,13 @@
 .workspaces > box {
 	border-radius: 0;
 	border: none;
-	background: @bg;
+	background-color: @bg;
 	color: @fg;
 	font-size: 22px;
 }
 
 .workspaces > .focused {
-	background: @fg;
+	background-color: @fg;
 	color: @bg;
 }
 
@@ -59,4 +60,13 @@
   50% {
     opacity: 0;
   }
+}
+
+.filler {
+	background-color: @bg;
+	background-size: 25% 100%;
+	/*background-image: linear-gradient(to right, transparent 25%, #83988F 25%, #83988F 75%, transparent 75%);*/
+	padding: 4px 2px;
+	background-origin: content-box;
+
 }

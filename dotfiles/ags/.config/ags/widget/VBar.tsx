@@ -20,7 +20,7 @@ function Clock() {
 	const seconds = Variable<string>("").poll(1000, () =>
         GLib.DateTime.new_now_local().format("%S")!)
 
-	return <MyBox>
+	return <box className="widget-box" vertical>
 		<label className="big-time"
 		onDestroy={() => time.drop()}
 		label={time()}
@@ -29,7 +29,7 @@ function Clock() {
 		onDestroy={() => seconds.drop()}
 		label={seconds()}
 		/>
-	</MyBox>
+	</box>
 }
 function Date() {
 	const date = Variable<string>("").poll(1000, () =>
@@ -66,9 +66,11 @@ function BatteryLevel() {
 
     return <box className="Battery"
         visible={bind(bat, "isPresent")}>
-        <box className="widget-box">
-			{bind(bat, "percentage")
-				.as(p => `BAT\n${Math.floor(p * 100)}%`)}
+        <box className="widget-box" halign={Gtk.Align.FILL}>
+			<box hexpand halign={Gtk.Align.CENTER}>
+				{bind(bat, "percentage")
+					.as(p => `BAT\n${Math.floor(p * 100)}%`)}
+			</box>
 		</box>
     </box>
 }
@@ -81,17 +83,17 @@ export default function Bar(monitor: Gdk.Monitor) {
         gdkmonitor={monitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}>
-        <centerbox vertical>
-            <box vertical vexpand valign={Gtk.Align.START}>
+        <box vertical>
+            <box vertical valign={Gtk.Align.START}>
                 <Clock />
                 <Date />
                 <Workspaces />
             </box>
-            <box vertical>
+            <box vertical vexpand valign={Gtk.Align.FILL} className="filler">
             </box>
-            <box vertical vexpand valign={Gtk.Align.END} >
+            <box vertical valign={Gtk.Align.END}>
 			<BatteryLevel />
             </box>
-        </centerbox>
+        </box>
     </window>
 }
