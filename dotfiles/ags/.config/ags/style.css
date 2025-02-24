@@ -7,8 +7,7 @@
 }
 
 .bar {
-	min-width: 60px;
-	background-color: rgba(0,0,0,0.0);
+	min-width: 36px;
 }
 
 .widget-box {
@@ -39,7 +38,7 @@
 }
 
 
-.workspaces > box {
+.workspace {
 	border-radius: 0;
 	border: none;
 	background-color: @bg;
@@ -47,7 +46,7 @@
 	font-size: 22px;
 }
 
-.workspaces > .focused {
+.workspace.focused {
 	background-color: @fg;
 	color: @bg;
 }

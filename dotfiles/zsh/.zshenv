@@ -22,7 +22,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Dmenu replacement
 export BEMENU_OPTS="--ifne \
-	--fn=Terminus 18 \
+	--fn=CommitMono 16 \
 	--no-cursor \
 	--cw 2 \
 	--ch 14 \

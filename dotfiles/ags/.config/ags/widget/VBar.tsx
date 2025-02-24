@@ -53,8 +53,12 @@ function Workspaces() {
             .sort((a, b) => a.id - b.id)
             .map(ws => (
                 <box className={bind(hypr, "focusedWorkspace")
-					.as(fw => ws === fw ? "focused" : "")} hpack="end">
-                    {ws.id}
+					.as(fw => "workspace " + (ws === fw ? "focused" : ""))}>
+					<box hexpand>
+					</box>
+					<box halign={Gtk.Align.END}>
+						{ws.id}
+					</box>
                 </box>
             ))
         )}
@@ -82,8 +86,12 @@ export default function Bar(monitor: Gdk.Monitor) {
         className="Bar"
         gdkmonitor={monitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
+		layer={Astal.Layer.BOTTOM}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}>
-        <box vertical>
+        <box vertical
+		margin={8}
+		marginRight={0}
+		className="bar">
             <box vertical valign={Gtk.Align.START}>
                 <Clock />
                 <Date />

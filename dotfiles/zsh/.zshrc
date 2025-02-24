@@ -111,7 +111,7 @@ precmd() {
 alias ls="ls --color"
 alias less="less --color=always | less -R"
 alias tree="tree -C"
-alias tmuxa="tmux a || tmux"
+alias tmuxa="pidof -q tmux && tmux a || tmux"
 
 INITIAL_QUERY="${*:-}"
 RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
