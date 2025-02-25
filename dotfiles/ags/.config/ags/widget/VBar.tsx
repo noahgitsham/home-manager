@@ -8,9 +8,9 @@ import { Variable, GLib, bind } from "astal"
 const gridSize = Variable(8);
 const gaps = gridSize;
 
-function MyBox(props) {
+const MyBox = (props) => {
 	return <box className="widget-box" vertical>
-	{props.children}
+		{props.children}
 	</box>
 }
 
@@ -20,7 +20,7 @@ function Clock() {
 	const seconds = Variable<string>("").poll(1000, () =>
         GLib.DateTime.new_now_local().format("%S")!)
 
-	return <box className="widget-box" vertical>
+	return <MyBox>
 		<label className="big-time"
 		onDestroy={() => time.drop()}
 		label={time()}
@@ -29,14 +29,14 @@ function Clock() {
 		onDestroy={() => seconds.drop()}
 		label={seconds()}
 		/>
-	</box>
+	</MyBox>
 }
 function Date() {
 	const date = Variable<string>("").poll(1000, () =>
         GLib.DateTime.new_now_local().format("%a\n%-e\n%b")!)
 
-	return <box className="widget-box" vertical>
-		<label className="clock-big"
+	return <box className="widget-box padded" vertical>
+		<label className="calendar" halign={Gtk.Align.FILL}
 		onDestroy={() => date.drop()}
 		label={date()}
 		/>
@@ -68,12 +68,18 @@ function Workspaces() {
 function BatteryLevel() {
     const bat = Battery.get_default()
 
-    return <box className="Battery"
+    return <box className="widget-box padded"
         visible={bind(bat, "isPresent")}>
         <box className="widget-box" halign={Gtk.Align.FILL}>
 			<box hexpand halign={Gtk.Align.CENTER}>
 				{bind(bat, "percentage")
 					.as(p => `BAT\n${Math.floor(p * 100)}%`)}
+			</box>
+			<box className={bind(bat, "percentage")
+					.as(p => p < 20 ? "batterIndicator" : "")}
+				style={bind(bat, "percentage")
+					.as(p => "background-color: red")}>
+
 			</box>
 		</box>
     </box>
@@ -84,14 +90,15 @@ export default function Bar(monitor: Gdk.Monitor) {
 
     return <window
         className="Bar"
+        name="Bar"
         gdkmonitor={monitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
 		layer={Astal.Layer.BOTTOM}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}>
         <box vertical
-		margin={8}
-		marginRight={0}
-		className="bar">
+			margin={8}
+			marginRight={0}
+			className="bar">
             <box vertical valign={Gtk.Align.START}>
                 <Clock />
                 <Date />

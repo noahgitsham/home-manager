@@ -10,7 +10,6 @@
       hypridle
       hyprlock
       hyprpicker
-      hyprpolkitagent
       j4-dmenu-desktop
       libnotify
       lxqt.lxqt-policykit
@@ -46,7 +45,7 @@
     utils = with pkgs; [
 
     ];
-  in with pkgs; [ xorg.xinit bspwm sxhkd kitty ]
+  in with pkgs; []
   ++ hyprland-desktop-pkgs
   ++ desktop-programs;
 
@@ -65,8 +64,8 @@
   home.file = {
     ".config/xinitrc" = {
       text = ''
-      ${pkgs.sxhkd}/bin/sxhkd &
-      exec ${pkgs.bspwm}/bin/bspwm
+      sxhkd &
+      exec bspwm
       '';
     };
   };

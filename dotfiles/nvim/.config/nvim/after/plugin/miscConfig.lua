@@ -39,18 +39,18 @@ require("ibl").setup {
 
 require("scrollEOF").setup()
 
-require("twilight").setup {
-	treesitter = true,
-	context = 16,
-	expand = {
-		"method_definition",
-		"function",
-		"table_constructor",
-		"table",
-		"method",
-		"if_statement"
-	},
-}
+-- require("twilight").setup {
+-- 	treesitter = true,
+-- 	context = 16,
+-- 	expand = {
+-- 		"method_definition",
+-- 		"function",
+-- 		"table_constructor",
+-- 		"table",
+-- 		"method",
+-- 		"if_statement"
+-- 	},
+-- }
 
 --vim.api.nvim_set_keymap("i", "<C-J", 'copilot#Accept("<CR>")', {silent = true, expr = true})
 --vim.g.copilot_no_tab_map = true

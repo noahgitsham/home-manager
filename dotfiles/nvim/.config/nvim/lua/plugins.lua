@@ -4,10 +4,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate"
 	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
 
 	-- Telescope
 	{
@@ -31,9 +27,7 @@ return {
 	{ "ray-x/lsp_signature.nvim", event = "VeryLazy" },
 
 	-- Snippets
-	{
-		"L3MON4D3/LuaSnip",
-	},
+	"L3MON4D3/LuaSnip",
 	"saadparwaiz1/cmp_luasnip",
 
 	-- DAP
@@ -56,21 +50,13 @@ return {
 	"lewis6991/gitsigns.nvim",
 
 	-- UI
-	"nvim-lualine/lualine.nvim",
 	"lukas-reineke/indent-blankline.nvim",
 	"Aasim-A/scrollEOF.nvim",
 	"catgoose/nvim-colorizer.lua",
-	"folke/zen-mode.nvim",
-	"folke/twilight.nvim",
 	"amarakon/nvim-unfocused-cursor",
 
 	-- Colours
-	"arturgoms/moonbow.nvim",
-	"ellisonleao/gruvbox.nvim",
-	"rebelot/kanagawa.nvim",
-	"savq/melange-nvim",
 	"jaredgorski/fogbell.vim",
-	"chriskempson/vim-tomorrow-theme",
 	"sjl/badwolf",
 
 	-- Misc

@@ -15,26 +15,21 @@
 	color: @fg;
 }
 
-.padded-box {
-	padding: 8px;
+.padded {
+	padding: 4px 0;
 }
 
-.widget-contents {
-	color: @fg;
-}
-
-
-.big-time {
-	font-size: 26px;
-	/*font-weight: bold;*/
-}
-
-.small-time {
-}
 
 .inverted {
 	background-color: @fg;
 	color: @bg;
+}
+
+
+.big-time {
+	font-size: 2em;
+}
+.small-time {
 }
 
 
@@ -43,13 +38,15 @@
 	border: none;
 	background-color: @bg;
 	color: @fg;
-	font-size: 22px;
+	font-size: 2em;
 }
 
 .workspace.focused {
 	background-color: @fg;
 	color: @bg;
+	font-weight: bold;
 }
+
 
 .flashing {
 	animation: blinker 1s linear infinite;
