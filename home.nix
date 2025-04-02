@@ -14,14 +14,9 @@ in {
   imports = [
     ./modules/music.nix
     ./modules/neovim.nix
-    ./modules/emacs.nix
     ./modules/cli.nix
     ./modules/desktop.nix
-    ./modules/design.nix
     ./modules/mime.nix
-    ./modules/syncthing.nix
-    ./modules/production.nix
-    ./modules/games.nix
     ./modules/uni.nix
     ./modules/password-management.nix
     ./modules/custom.nix
@@ -44,8 +39,8 @@ in {
   home.file = let
     dotfiles-dir = "${config.home.homeDirectory}/.config/home-manager/dotfiles";
   in {
-    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshrc";
-    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshenv";
+    ".config/zsh/.zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshrc";
+    ".config/zsh/.zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshenv";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/nvim/.config/nvim";
     ".config/foot".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/foot/.config/foot";
     ".config/ags".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/ags/.config/ags";

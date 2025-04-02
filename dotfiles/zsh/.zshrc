@@ -9,16 +9,18 @@ setopt HIST_SAVE_NO_DUPS
 setopt histignorealldups
 HISTSIZE=50000
 SAVEHIST=40000
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
 # Set the default WORDCHARS
 WORDCHARS='*?_[]~=&;|!#$%^(){}<>'
 
-bindkey -v '^?' backward-delete-char
-bindkey '^R' history-incremental-search-backward
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
-bindkey "^W" backward-kill-word
-bindkey '^_' backward-kill-word
+bindkey -e
+# bindkey '^?' backward-delete-char
+# bindkey '^R' history-incremental-search-backward
+# bindkey "^P" up-line-or-search
+# bindkey "^N" down-line-or-search
+# bindkey "^W" backward-kill-word
+# bindkey '^_' backward-kill-word
 KEYTIMEOUT=1
 
 # Completion

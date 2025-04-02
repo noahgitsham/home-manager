@@ -1,4 +1,24 @@
-{
+let 
+  text = (map (x:"text/${x}") [
+    "plain"
+  ]);
+  code = (map (x:"text/${x}") [
+    "css"
+    "html"
+    "javascript"
+    "troff"
+    "x-asm"
+    "x-c"
+    "x-chdr"
+    "x-c++"
+    "x-c++src"
+    "x-fortran"
+    "x-java-source"
+    "x-pascal"
+    "x-python"
+    "x-"
+  ]);
+in {
   xdg.mimeApps = let 
     browsers = ["librewolf.desktop" "firefox.desktop" "chromium-browser.desktop"];
     image-viewers = ["imv-dir.desktop"] ++ browsers;
@@ -8,8 +28,8 @@
   in {
     enable = true;
     defaultApplications = {
-      "text/*" = ["neovim.desktop"];
-      "text/org" = ["emacs.desktop" "neoim.desktop"];
+      "text/plain" = text-editors;
+      "text/org" = ["emacs.desktop" "neovim.desktop"];
       "application/pdf" = ["org.pwmt.zathura.desktop"];
       "x-scheme-handler/http" = browsers;
       "text/html" = browsers;

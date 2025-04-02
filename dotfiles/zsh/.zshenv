@@ -10,6 +10,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 
 # Path
+typeset -U path PATH # Force unique
 path+=("$HOME/.local/bin")
 path+=("$HOME/scripts")
 export PATH
@@ -47,7 +48,6 @@ export BEMENU_OPTS="--ifne \
 
 # XDG User #Directories
 [ -d "$XDG_STATE_HOME"/zsh ] || mkdir "$XDG_STATE_HOME"/zsh
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export ANDROID_HOME="$XDG_DATA_HOME"/android
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
