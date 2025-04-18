@@ -18,8 +18,6 @@ in {
     ./modules/desktop.nix
     ./modules/mime.nix
     ./modules/uni.nix
-    ./modules/password-management.nix
-    ./modules/custom.nix
   ];
   home.packages = with pkgs; [ zoom-us ];
 

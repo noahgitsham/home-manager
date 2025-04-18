@@ -15,8 +15,8 @@ export HISTFILE="$XDG_STATE_HOME"/zsh/history
 WORDCHARS='*?_[]~=&;|!#$%^(){}<>'
 
 bindkey -e
-# bindkey '^?' backward-delete-char
-# bindkey '^R' history-incremental-search-backward
+bindkey '^U' backward-kill-line # Make ctrl u delete from cursor to start, not whole line
+bindkey '^[[3~' delete-char # Fix delete inserts tilde
 # bindkey "^P" up-line-or-search
 # bindkey "^N" down-line-or-search
 # bindkey "^W" backward-kill-word
