@@ -1,11 +1,5 @@
 { config, pkgs, lib, ... }:
-
-let
-  cursor-config = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-  };
-in {
+{
   home.username = "noah";
   home.homeDirectory = "/home/noah";
 
@@ -15,18 +9,13 @@ in {
     ./modules/music.nix
     ./modules/neovim.nix
     ./modules/cli.nix
-    ./modules/desktop.nix
     ./modules/mime.nix
     ./modules/uni.nix
+    ./modules/theme.nix
   ];
   home.packages = with pkgs; [ zoom-us ];
 
   nixpkgs.config.allowUnfree = true;
-
-  services.udiskie = {
-    enable = true;
-    automount = true;
-  };
 
   # home.file = let
   #   stow = import ./stow.nix { config = config; lib = pkgs.lib; };
@@ -35,32 +24,27 @@ in {
   # };
 
   home.file = let
-    dotfiles-dir = "${config.home.homeDirectory}/.config/home-manager/dotfiles";
+    # TODO: Stupid hack for an even stupider issue
+    # https://github.com/nix-community/home-manager/issues/3032
+    dotfiles-dir = "${config.home.homeDirectory}/.config/home-manager/dotfiles"; 
+    dotfile = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/${path}";
   in {
-    ".config/zsh/.zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshrc";
-    ".config/zsh/.zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/zsh/.zshenv";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/nvim/.config/nvim";
-    ".config/foot".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/foot/.config/foot";
-    ".config/ags".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/ags/.config/ags";
-    ".config/emacs".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/emacs/.config/emacs";
-    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/hypr/.config/hypr";
+    ".config/zsh/.zshrc".source  = dotfile "zsh/.zshrc";
+    ".config/zsh/.zshenv".source = dotfile "zsh/.zshenv";
+    ".config/nvim".source  = dotfile "nvim/.config/nvim";
+    ".config/foot".source  = dotfile "foot/.config/foot";
+    ".config/ags".source   = dotfile "ags/.config/ags";
+    ".config/emacs".source = dotfile "emacs/.config/emacs";
+    ".config/hypr".source  = dotfile "hypr/.config/hypr";
 
-    ".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/tmux/.config/tmux";
+    ".config/tmux".source = dotfile "tmux/.config/tmux";
     ".local/share/tmux/plugins/tpm".source = fetchGit { url = "https://github.com/tmux-plugins/tpm"; rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946"; };
 
-    ".config/bspwm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/bspwm/.config/bspwm";
-    ".config/sxhkd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles-dir}/sxhkd/.config/sxhkd";
+    ".config/bspwm".source = dotfile "bspwm/.config/bspwm";
+    ".config/sxhkd".source = dotfile "sxhkd/.config/sxhkd";
 
     ".config/user-dirs.dirs".source   = ./dotfiles/user-dirs/.config/user-dirs.dirs;
     ".config/user-dirs.locale".source = ./dotfiles/user-dirs/.config/user-dirs.locale;
-  };
-
-  home.pointerCursor = cursor-config;
-  gtk.cursorTheme = cursor-config;
-
-  gtk.theme = {
-    package = pkgs.fluent-gtk-theme;
-    name = "Fluent";
   };
 
   home.activation.diff = lib.hm.dag.entryAfter ["installPackages"] ''
