@@ -65,5 +65,5 @@ return {
 
 	-- Local Plugins
 	{ "noahgitsham/inbar.nvim", dev = true },
-	{ "noahgitsham/tomorrow-day.nvim", dev = true },
+	{ "noahgitsham/tomorrow.nvim", dev = true },
 }
