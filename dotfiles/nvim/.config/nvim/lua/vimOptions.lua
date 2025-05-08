@@ -57,8 +57,10 @@ vim.opt.showmode = false
 
 -- Leader
 vim.g.mapleader = "\\"
-vim.opt.ttimeout = false
-vim.opt.timeout = false
+-- https://github.com/neovim/neovim/issues/29047
+-- vim.opt.ttimeout = false
+vim.opt.ttimeoutlen = 0
+
 
 -- Cursor
 vim.opt.cursorline = true

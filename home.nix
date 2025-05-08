@@ -10,10 +10,8 @@
     ./modules/neovim.nix
     ./modules/cli.nix
     ./modules/mime.nix
-    ./modules/uni.nix
     ./modules/theme.nix
   ];
-  home.packages = with pkgs; [ zoom-us ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -36,6 +34,7 @@
     ".config/ags".source   = dotfile "ags/.config/ags";
     ".config/emacs".source = dotfile "emacs/.config/emacs";
     ".config/hypr".source  = dotfile "hypr/.config/hypr";
+    ".config/bat".source  = dotfile "bat/.config/bat";
 
     ".config/tmux".source = dotfile "tmux/.config/tmux";
     ".local/share/tmux/plugins/tpm".source = fetchGit { url = "https://github.com/tmux-plugins/tpm"; rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946"; };

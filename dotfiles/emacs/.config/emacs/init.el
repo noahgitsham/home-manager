@@ -6,12 +6,12 @@
 			     (string-to-number (emacs-init-time))))))
 
 ;; Package Manager
-(defvar elpaca-installer-version 0.8)
+(defvar elpaca-installer-version 0.11)
 (defvar elpaca-directory (expand-file-name "elpaca/" emacs-data-path))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-                              :ref nil :depth 1
+                              :ref nil :depth 1 :inherit ignore
                               :files (:defaults "elpaca-test.el" (:exclude "extensions"))
                               :build (:not elpaca--activate-package)))
 (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
@@ -21,7 +21,7 @@
   (add-to-list 'load-path (if (file-exists-p build) build repo))
   (unless (file-exists-p repo)
     (make-directory repo t)
-    (when (< emacs-major-version 28) (require 'subr-x))
+    (when (<= emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
         (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
                   ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
@@ -41,7 +41,7 @@
   (unless (require 'elpaca-autoloads nil t)
     (require 'elpaca)
     (elpaca-generate-autoloads "elpaca" repo)
-    (load "./elpaca-autoloads")))
+    (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
@@ -54,7 +54,7 @@
   (setq use-package-always-ensure t))
 
 ;; Fix weird startup message
-;;(setq elpaca-core-date '(20231211))
+;;(setq Elpaca-core-date '(20231211))
 (elpaca-wait)
 
 ;; Vim emulation
@@ -66,7 +66,7 @@
   (setq evil-respect-visual-line-mode t)
   :config
   (evil-set-undo-system 'undo-redo)
-  (defun mouse-set-point (event &optional PROMOTE-TO-REGION))
+  ;;(defun mouse-set-point (event &optional PROMOTE-TO-REGION))
   (setq scroll-step 1 ; Vim scrolling
   	scroll-margin 8 ; Scrolloff
         scroll-conservatively 101) ; Remove weird jumping
@@ -92,6 +92,7 @@
 ;; UI Changes ;;
 ;;;;;;;;;;;;;;;;
 (add-to-list 'default-frame-alist '(font . "Fragment Mono 14"))
+;;(add-to-list 'default-frame-alist '(internal-border-width . 14))
 
 (set-face-attribute 'variable-pitch nil :family "Helvetica Neue" :weight 'bold)
 
@@ -218,7 +219,7 @@ end-of-buffer signals; pass the rest to the default handler."
 ;; Org Mode ;;
 ;;;;;;;;;;;;;;
 (use-package org
-  :ensure (:repo "https://git.tecosaur.net/tec/org-mode.git")
+  :ensure (:repo "https://git.tecosaur.net/tec/org-mode.git" :branch "dev")
   :defer nil
   :bind ( ;; Global maps
 	 ("C-c a" . org-agenda)
@@ -226,7 +227,11 @@ end-of-buffer signals; pass the rest to the default handler."
 	 ("C-c >" . org-goto-calendar)
 	 ("C-c b" . org-switchb)
 	 ("C-c s" . org-timeblock)
-	 ("C-c d" . cfw:open-org-calendar)
+
+	 ("C-c l"   . org-store-link)
+	 ("C-c C-l" . org-insert-link)
+
+	 ;;("C-c d" . cfw:open-org-calendar)
 	 :map org-mode-map ;; Local maps
 	 ("M-j" . org-forward-heading-same-level)
 	 ("M-k" . org-backward-heading-same-level)
@@ -467,11 +472,6 @@ end-of-buffer signals; pass the rest to the default handler."
 ;(use-package calfw-org
 ;  :after (org calfw))
 
-(use-package smartparens
-  :config
-  (require 'smartparens-config)
-  (smartparens-global-mode 1))
-
 ;; Snippets
 ;(use-package yasnippet
 ;  :config
@@ -491,6 +491,11 @@ end-of-buffer signals; pass the rest to the default handler."
   (add-to-list 'solaire-mode-remap-alist '(olivetti-fringe . solaire-default-face))
   (add-to-list 'solaire-mode-remap-alist '(fringe . solaire-default-face))
   )
+
+(use-package smartparens
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1))
 
 
 ;;;;;;;;;;;
