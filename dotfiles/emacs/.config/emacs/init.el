@@ -215,6 +215,29 @@ end-of-buffer signals; pass the rest to the default handler."
 
 (steal-face-attribute 'mode-line :background 'minibuffer-prompt)
 
+;;;;;;;;;;
+;; Calc ;;
+;;;;;;;;;;
+(defmath extendedeuclid (a b)
+  (progn
+    (if (= b 0)
+	(cl-values a 1 0)
+      (let ((r (/ (- a q) b)))
+	(cl-multiple-value-bind (d i j) (calcFunc-extendedeuclid b (mod a b))
+	  (cl-values d j (- i (* j r))))
+	)
+      )
+    )
+  )
+
+(defmath mmi (a b)
+  (if (= (gcd a b) 1)
+      (cl-multiple-value-bind (d i j) (calcFunc-extendedeuclid a b)
+	(mod i b))
+    (error "These numbers aren't coprime, there is no multiplicative inverse")
+    )
+  )
+
 ;;;;;;;;;;;;;;
 ;; Org Mode ;;
 ;;;;;;;;;;;;;;
