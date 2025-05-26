@@ -398,6 +398,25 @@ end-of-buffer signals; pass the rest to the default handler."
   ;; Exporting
   (setq org-export-with-section-numbers nil)
 
+  ;; HTML style
+  (setq org-html-style "<style>
+body {
+  font-family: \"Fragment Mono\", \"monospace\";
+}
+
+#table-of-contents {
+  background-color: beige;
+  float: right;
+  margin: 0 0.5em;
+  padding: 0 0.5em;
+}
+
+.tag {
+  float: right;
+  font-size: 100%;
+}
+</style>")
+
   ;; Custom face changes
   (with-eval-after-load 'org
     (set-face-attribute 'org-document-title nil :inherit 'variable-pitch :height 3.0 :box '(:line-width 20 :color "#1d2021"))
